@@ -21,7 +21,7 @@ export function FeedbackTypeStep({ onFeedbackTypeChanged }: Props) {
             key={key}
           >
             <img src={value.image.source} alt={value.image.alt} />
-            <span>{value.title}</span>
+            <span className="xsm:text-sm">{value.title}</span>
           </button>
         ))}
       </div>
