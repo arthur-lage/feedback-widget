@@ -111,6 +111,7 @@ export function Form({
           onRemoveScreenshot={handleRemoveScreenshot}
         />
         <SubmitButton
+          isDisabled={comment.length === 0}
           onPress={handleFormSubmit}
           isLoading={isSendingFeedback}
         />

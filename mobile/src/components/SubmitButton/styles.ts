@@ -15,4 +15,10 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.medium,
     color: theme.colors.text_on_brand_color,
   },
+  disabled: {
+    backgroundColor: theme.colors.brand_disabled,
+  },
+  titleDisabled: {
+    opacity: .5
+  }
 });
