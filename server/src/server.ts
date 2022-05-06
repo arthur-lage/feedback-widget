@@ -4,7 +4,6 @@ import { routes } from "./routes";
 
 import cors from 'cors'
 
-const PORT = process.env.PORT || 3333;
 const app = express();
 
 app.use(cors())
@@ -12,4 +11,5 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+// Run app
+app.listen(process.env.PORT || 3333, () => console.log(`App is running on port ${process.env.PORT || 3333}`));
