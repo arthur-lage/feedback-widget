@@ -42,8 +42,8 @@ function Widget() {
     setFeedbackType(null);
   }
 
-  function handleChangeFeedbackSent() {
-    setFeedbackSent(true);
+  function handleChangeFeedbackSent(state: boolean) {
+    setFeedbackSent(state);
   }
 
   return (

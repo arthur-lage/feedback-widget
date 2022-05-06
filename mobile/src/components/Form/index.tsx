@@ -8,10 +8,12 @@ import { styles } from "./styles";
 
 import { FeedbackType } from "../Widget";
 
+import * as FileSystem from "expo-file-system";
+
 type Props = {
   feedbackType: FeedbackType;
   handleBack: () => void;
-  handleChangeFeedbackSent: () => void;
+  handleChangeFeedbackSent: (state: boolean) => void;
 };
 
 import { captureScreen } from "react-native-view-shot";
@@ -20,15 +22,18 @@ import { feedbackTypes } from "../../utils/feedbackTypes";
 
 import { ScreenshotButton } from "../ScreenshotButton";
 import { SubmitButton } from "../SubmitButton";
+import { api } from "../../services/api";
 
 export function Form({
   feedbackType,
   handleBack,
   handleChangeFeedbackSent,
 }: Props) {
+  const [comment, setComment] = useState<string>("");
+
   const feedbackTypeInfo = feedbackTypes[feedbackType];
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSendingFeedback, setIsSendingFeedback] = useState(false);
 
   const [screenshot, setScreenshot] = useState<string | null>(null);
 
@@ -45,13 +50,30 @@ export function Form({
     setScreenshot(null);
   }
 
-  function handleFormSubmit() {
-    setIsLoading(true);
+  async function handleFormSubmit() {
+    if (isSendingFeedback) {
+      return;
+    }
 
-    setTimeout(() => {
-      handleChangeFeedbackSent();
-      setIsLoading(false);
-    }, 1700);
+    setIsSendingFeedback(true);
+
+    const screenshotBase64 =
+      screenshot &&
+      (await FileSystem.readAsStringAsync(screenshot, { encoding: "base64" }));
+
+    try {
+      await api.post("/feedbacks", {
+        type: feedbackType,
+        comment,
+        screenshot: `data:image/png;base64,${screenshotBase64}`,
+      });
+
+      setIsSendingFeedback(false);
+      handleChangeFeedbackSent(true);
+    } catch (err) {
+      console.log(err);
+      setIsSendingFeedback(false);
+    }
   }
 
   return (
@@ -74,6 +96,9 @@ export function Form({
 
       <TextInput
         multiline
+        value={comment}
+        onChangeText={setComment}
+        autoCorrect={false}
         style={styles.input}
         placeholderTextColor={theme.colors.text_secondary}
         placeholder="Algo não está funcionando bem? Queremos corrigir. Conte com detalhes o que está acontecendo."
@@ -85,7 +110,10 @@ export function Form({
           onTakeScreenshot={handleTakeScreenshot}
           onRemoveScreenshot={handleRemoveScreenshot}
         />
-        <SubmitButton onPress={handleFormSubmit} isLoading={isLoading} />
+        <SubmitButton
+          onPress={handleFormSubmit}
+          isLoading={isSendingFeedback}
+        />
       </View>
     </View>
   );
