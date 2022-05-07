@@ -7,9 +7,13 @@ In this project, I was able to learn a lot about ReactJS, React Native, Prisma, 
 # 🌆 Images
 
 <img src="./assets/screenshot-1.png" width=800>
-<img src="./assets/screenshot-2.png" width=800>
-<img src="./assets/screenshot-3.png" width=800>
-<img src="./assets/screenshot-4.png" width=800>
+
+<div style="display: flex; align-items: flex-start;">
+  <img src="./assets/screenshot-2.png" width=275 height=250>
+  <img src="./assets/screenshot-3.png" width=275 height=250>
+  <img src="./assets/screenshot-4.png" width=275 height=250>
+</div>
+
 
 # ⬇ Run it in your device (WEB)
 
