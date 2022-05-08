@@ -10,7 +10,8 @@ module.exports = {
       },
       screens: {
         'xsm': {max: '399px'},
-        'mobile': {max: '767px'}
+        'mobile': {max: '767px'},
+        'st415': {max: '415px'},
       }
     },
   },

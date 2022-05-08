@@ -29,6 +29,7 @@ export function ScreenshotButton({ screenshot, handleSetScreenshot }: Props) {
           backgroundPosition: "right bottom",
           backgroundSize: 100,
         }}
+        title={screenshot !== null ? "Remover foto" : "Tirar foto da tela"}
         onClick={() => handleSetScreenshot(null)}
         className="p-1 w-10 h-10 rounded-md border-transparent flex justify-end items-end text-zinc-400 hover:text-zinc-100"
       >

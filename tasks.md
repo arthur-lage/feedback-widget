@@ -1,4 +1,4 @@
-[] - Improve email design
+[x] - Improve email design
 [] - dark/light theme
 [] - feedbacks dashboard
-[] - validate errors and inputs
+[x] - validate errors and inputs

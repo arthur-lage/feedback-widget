@@ -35,6 +35,7 @@ export function FeedbackSuccessStep({ handleRestartFeedback }: Props) {
           type="button"
           className="mt-4 rounded-md px-4 py-2 bg-zinc-800 hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors focus:ring-offset-zinc-900 focus:ring-brand-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-500"
           onClick={handleRestartFeedback}
+          title="Enviar outro feedback"
         >
           Quero enviar outro
         </button>

@@ -7,6 +7,8 @@ import { FormEvent, useState } from "react";
 import { api } from "../../../services/api";
 import { Loading } from "../../Loading";
 
+import { useError } from "../../../hooks/useError";
+
 interface Props {
   feedbackType: FeedbackType;
   handleRestartFeedback: () => void;
@@ -18,6 +20,8 @@ export function FeedbackContentStep({
   handleRestartFeedback,
   onFeedbackSent,
 }: Props) {
+  const { errors, handleSetErrors } = useError();
+
   const [isSendingFeedback, setIsSendingFeedback] = useState<boolean>(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [comment, setComment] = useState<string>("");
@@ -39,15 +43,16 @@ export function FeedbackContentStep({
         comment,
         screenshot,
       })
-      .then(() => {
-        setIsSendingFeedback(false);
-
-        onFeedbackSent();
+      .then((res) => {
+        if (res.status === 201) {
+          setIsSendingFeedback(false);
+          onFeedbackSent();
+        }
       })
       .catch((err) => {
         setIsSendingFeedback(false);
 
-        console.log(err);
+        handleSetErrors(err.response.data.message);
       });
   }
 
@@ -90,6 +95,7 @@ export function FeedbackContentStep({
 
           <button
             type="submit"
+            title="Enviar feedback"
             className="p-2 bg-brand-500 rounded-[4px] border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors focus:ring-offset-zinc-900 focus:ring-brand-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-500"
             disabled={comment.length === 0 || isSendingFeedback}
           >
