@@ -31,7 +31,7 @@ export function ScreenshotButton({ screenshot, handleSetScreenshot }: Props) {
         }}
         title={screenshot !== null ? "Remover foto" : "Tirar foto da tela"}
         onClick={() => handleSetScreenshot(null)}
-        className="p-1 w-10 h-10 rounded-md border-transparent flex justify-end items-end text-zinc-400 hover:text-zinc-100"
+        className="p-1 w-10 h-10 rounded-md border-transparent flex justify-end transition-colors ease-linear items-end text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100"
       >
         <Trash weight="fill" />
       </button>
@@ -42,12 +42,12 @@ export function ScreenshotButton({ screenshot, handleSetScreenshot }: Props) {
     <button
       type="button"
       onClick={handleTakeScreenshot}
-      className="p-2 bg-zinc-600 rounded-md border-transparent hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500"
+      className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-600 rounded-md border-transparent dark:hover:bg-zinc-700 ease-linear transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-900 focus:ring-brand-500"
     >
       {isTakingScreenshot ? (
-        <Loading />
+        <Loading color="text-zinc-800 dark:text-zinc-100" />
       ) : (
-        <Camera className="w-6 h-6 text-zinc-100" />
+        <Camera className="w-6 h-6 text-zinc-800 dark:text-zinc-100" />
       )}
     </button>
   );

@@ -1,14 +1,38 @@
-import { X } from "phosphor-react";
+import { useEffect, useState } from "react";
+
 import { Widget } from "./components/Widget";
+import { ThemeToggler } from './components/ThemeToggler'
+
 import { useError } from "./hooks/useError";
+
+import { X } from "phosphor-react";
 
 export function App() {
   const { removeError, errors } = useError();
 
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    () => localStorage.theme === "dark"
+  );
+
+  function toggleTheme() {
+    setIsDarkMode(!isDarkMode);
+  }
+
+  useEffect(() => {
+    const html = document.documentElement;
+
+    const prevTheme = isDarkMode ? "light" : "dark";
+    html.classList.remove(prevTheme);
+
+    const nextTheme = isDarkMode ? "dark" : "light";
+    html.classList.add(nextTheme);
+
+    localStorage.setItem("theme", nextTheme);
+  }, [isDarkMode]);
+
   return (
     <>
-      {errors && (
-        <>
+      {errors && <>
           {errors.length > 0 && (
             <div
               className={`absolute top-3 left-3 flex flex-col transition-all st415:left-[50%] st415:translate-x-[-50%] st415:w-[95vw] max-h-[200px] w-max pr-3 ${
@@ -32,8 +56,10 @@ export function App() {
               ))}
             </div>
           )}
-        </>
-      )}
+      </>}
+
+      <ThemeToggler isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+
       <Widget />
     </>
   );

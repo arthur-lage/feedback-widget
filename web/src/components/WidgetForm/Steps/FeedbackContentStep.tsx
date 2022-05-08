@@ -20,7 +20,7 @@ export function FeedbackContentStep({
   handleRestartFeedback,
   onFeedbackSent,
 }: Props) {
-  const { errors, handleSetErrors } = useError();
+  const { handleSetErrors } = useError();
 
   const [isSendingFeedback, setIsSendingFeedback] = useState<boolean>(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
@@ -62,12 +62,12 @@ export function FeedbackContentStep({
         <button
           onClick={handleRestartFeedback}
           type="button"
-          className="absolute top-5 left-5 text-zinc-400 hover:text-zinc-100"
+          className="absolute top-5 left-5 transition-colors duration-150 ease-linear text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100"
         >
           <ArrowLeft weight="bold" className="w-4 h-4" />
         </button>
 
-        <span className="text-xl leading-6 flex items-center gap-2">
+        <span className="text-xl leading-6 font-medium flex items-center gap-2 text-zinc-800 dark:text-zinc-100">
           <img
             src={feedbackTypeInfo.image.source}
             alt={feedbackTypeInfo.image.alt}
@@ -81,8 +81,8 @@ export function FeedbackContentStep({
 
       <form onSubmit={(e) => handleFormSubmit(e)} className="my-4 w-full">
         <textarea
-          className="mobile:min-w-full focus:outline-none min-w-[304px] min-h-[112px] text-sm placeholder:text-zinc-400 text-zinc-100 border-zinc-600 bg-transparent rounded-md focus:border-brand-500 focus:ring-1 focus:ring-brand-500 resize-none scrollbar scrollbar-zinc-700 scrollbar-track-transparent"
-          placeholder="Conte com detalhes o que está acontecendo"
+          className="mobile:min-w-full focus:outline-none min-w-[304px] min-h-[112px] text-sm placeholder:text-zinc-500 dark:placeholder:text-zinc-400 text-zinc-800 dark:text-zinc-100 border-zinc-600 bg-transparent rounded-md focus:border-brand-500 focus:ring-1 focus:ring-brand-500 resize-none scrollbar scrollbar-zinc-700 scrollbar-track-transparent"
+          placeholder="Conte com detalhes o que está acontecendo..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />

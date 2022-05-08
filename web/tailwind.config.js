@@ -1,5 +1,6 @@
 module.exports = {
   content: ["./src/**/*.tsx"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -9,10 +10,13 @@ module.exports = {
         },
       },
       screens: {
-        'xsm': {max: '399px'},
-        'mobile': {max: '767px'},
-        'st415': {max: '415px'},
-      }
+        xsm: { max: "399px" },
+        mobile: { max: "767px" },
+        st415: { max: "415px" },
+      },
+      boxShadow: {
+        widget_button: "0 0 15px 1px #8257e64d",
+      },
     },
   },
   plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar")],

@@ -9,7 +9,7 @@ export function Widget() {
         <WidgetForm />
       </Popover.Panel>
 
-      <Popover.Button className="transition-all duration-200 ease-linear group flex items-center bg-brand-500 hover:bg-brand-700 rounded-full px-3 h-12 text-white">
+      <Popover.Button className="transition-all duration-200 ease-linear group flex items-center shadow-widget_button shadow-brand-500 bg-brand-500 hover:bg-brand-300 rounded-full px-3 h-12 text-white">
         <ChatTeardropDots className="w-6 h-6" />
 
         <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-[375ms] ease-linear">
