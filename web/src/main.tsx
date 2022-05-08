@@ -4,7 +4,6 @@ import { App } from "./App";
 
 import { ErrorProvider } from "./contexts/ErrorContext";
 
-
 import "./global.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
