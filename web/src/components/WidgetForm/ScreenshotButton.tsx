@@ -2,6 +2,7 @@ import html2canvas from "html2canvas";
 import { Camera, Trash } from "phosphor-react";
 import { useState } from "react";
 import { Loading } from "../Loading";
+import { Tooltip } from "../Tooltip";
 
 type Props = {
   handleSetScreenshot: (screenshot: string | null) => void;
@@ -42,8 +43,9 @@ export function ScreenshotButton({ screenshot, handleSetScreenshot }: Props) {
     <button
       type="button"
       onClick={handleTakeScreenshot}
-      className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-600 rounded-md border-transparent dark:hover:bg-zinc-700 ease-linear transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-900 focus:ring-brand-500"
+      className="has-tooltip p-2 rounded-md border-transparent dark:hover:bg-zinc-700 ease-linear transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-100 dark:focus:ring-offset-zinc-900 focus:ring-brand-500"
     >
+      <Tooltip label="Capturar tela" />
       {isTakingScreenshot ? (
         <Loading color="text-zinc-800 dark:text-zinc-100" />
       ) : (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Widget } from "./components/Widget";
-import { ThemeToggler } from './components/ThemeToggler'
+import { ThemeToggler } from "./components/ThemeToggler";
 
 import { useError } from "./hooks/useError";
 
@@ -32,7 +32,8 @@ export function App() {
 
   return (
     <>
-      {errors && <>
+      {errors && (
+        <>
           {errors.length > 0 && (
             <div
               className={`absolute top-3 left-3 flex flex-col transition-all st415:left-[50%] st415:translate-x-[-50%] st415:w-[95vw] max-h-[200px] w-max pr-3 ${
@@ -56,7 +57,8 @@ export function App() {
               ))}
             </div>
           )}
-      </>}
+        </>
+      )}
 
       <ThemeToggler isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 

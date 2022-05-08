@@ -9,3 +9,17 @@ body {
 * {
   @apply font-["Inter"];
 }
+
+.has-tooltip {
+  @apply relative;
+}
+
+.tooltip::after {
+  @apply bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-100
+   absolute left-0 top-[-28px] p-1 whitespace-nowrap opacity-0 transition-all duration-200 ease-linear rounded-lg pointer-events-none invisible z-10 text-xs font-medium;
+  content: attr(aria-label);
+}
+
+.has-tooltip:hover .tooltip::after {
+  @apply opacity-100 pointer-events-auto visible;
+}
