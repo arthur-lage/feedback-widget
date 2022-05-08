@@ -4,7 +4,6 @@ import { App } from "./App";
 
 import { ErrorProvider } from "./contexts/ErrorContext";
 
-import "flowbite";
 
 import "./global.css";
 
