@@ -4,6 +4,8 @@ export class DeleteFeedbacksUseCase {
   constructor(private feedbacksRepository: FeedbacksRepository) {}
 
   async execute() {
-    await this.feedbacksRepository.delete();
+    if (this.feedbacksRepository.delete) {
+      await this.feedbacksRepository.delete();
+    }
   }
 }

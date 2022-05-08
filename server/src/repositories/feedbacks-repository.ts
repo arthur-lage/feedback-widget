@@ -11,7 +11,7 @@ export interface Feedback {
 }
 
 export interface FeedbacksRepository {
-  create: (data: FeedbackCreateData) => Promise<void>;
-  delete: () => Promise<void>;
-  get: () => Promise<Feedback[]>;
+  create?: (data: FeedbackCreateData) => Promise<void>;
+  delete?: () => Promise<void>;
+  get?: () => Promise<Feedback[]>;
 }

@@ -28,11 +28,13 @@ export class SubmitFeedbackUseCase {
       throw new Error("Invalid screenshot format.");
     }
 
-    await this.feedbacksRepository.create({
-      type,
-      comment,
-      screenshot,
-    });
+    if (this.feedbacksRepository.create) {
+      await this.feedbacksRepository.create({
+        type,
+        comment,
+        screenshot,
+      });
+    }
 
     await this.mailAdapter.sendMail({
       subject: "Novo feedback",
@@ -45,13 +47,12 @@ export class SubmitFeedbackUseCase {
         `<h2 style="font-family: sans-serif; font-size: 1.4rem; text-align: center; color: #111;">You have received a new feedback!</h2>`,
         `<span style="margin-top:1 rem; font-family: sans-serif; font-size: 1rem; color: #333">Feedback Type: ${type}</span>`,
         `<span style="margin-top: 1rem; font-family: sans-serif; font-size: 1rem; color: #333">Feedback: ${comment}</span>`,
-        screenshot
-          ? [
-              `<a style="text-decoration: none" target="_blank" href="${screenshot}">`,
-              `<img style="border-radius: 0.5rem; margin-top: 2rem" width="750" src="${screenshot}" alt="Feedback Screenshot"/>`,
-              `</a>`,
-            ].join("\n")
-          : ``,
+        screenshot &&
+          [
+            `<a style="text-decoration: none" target="_blank" href="${screenshot}">`,
+            `<img style="border-radius: 0.5rem; margin-top: 2rem" width="750" src="${screenshot}" alt="Feedback Screenshot"/>`,
+            `</a>`,
+          ].join("\n"),
         `</div>`,
       ].join("\n"),
     });
