@@ -10,7 +10,7 @@ export function ThemeToggler({ isDarkMode, toggleTheme }: Props) {
   return (
     <div className="absolute top-4 right-4">
       <div
-        className="has-tooltip cursor-pointer p-2 rounded-[8px] hover:rounded-[50%] transition-all duration-200 bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100"
+        className="has-tooltip cursor-pointer p-2 rounded-[8px] hover:rounded-[50%] transition-all duration-200 bg-brand-500 hover:bg-brand-300 dark:text-zinc-100"
         onClick={toggleTheme}
       >
         <Tooltip
