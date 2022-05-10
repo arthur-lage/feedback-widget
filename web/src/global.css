@@ -29,7 +29,11 @@ body {
 }
 
 .tooltip.profile::after {
-  @apply right-[-10px] top-[56px];
+  @apply right-[-10px] top-[56px] transition-all ease-out duration-300;
+}
+
+.tooltip.profile-active::after {
+  @apply right-[56px] top-[13px] transition-all ease-out duration-300;
 }
 
 .has-tooltip:hover .tooltip::after {

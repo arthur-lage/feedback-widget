@@ -1,21 +1,25 @@
-import { signInWithPopup } from "firebase/auth";
-import { createContext, useState } from "react";
+import {
+  browserSessionPersistence,
+  setPersistence,
+  signInWithPopup,
+} from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 
 import { GoogleAuthProvider, signOut } from "firebase/auth";
 
 import { auth } from "../services/firebase";
-
-type UserProps = {
-  currentUser: User | null;
-  login: () => void;
-  logout: () => void;
-};
 
 type User = {
   id: string;
   email: string;
   name: string;
   image: string;
+};
+
+type UserProps = {
+  currentUser: User | undefined;
+  SignInWithGoogle: () => void;
+  logout: () => void;
 };
 
 export const UserContext = createContext({} as UserProps);
@@ -25,37 +29,61 @@ type Props = {
 };
 
 export function UserProvider({ children }: Props) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User>();
 
   const provider = new GoogleAuthProvider();
 
-  function login() {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = {
-          id: result.user.uid,
-          email: result.user.email,
-          name: result.user.displayName,
-          image: result.user.photoURL,
-        };
+  function SignInWithGoogle() {
+    setPersistence(auth, browserSessionPersistence).then(() => {
+      return signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = {
+            id: result.user.uid,
+            email: result.user.email,
+            name: result.user.displayName,
+            image: result.user.photoURL,
+          };
 
-        setCurrentUser(user as User);
-      })
-      .catch((err) => console.log(err));
+          setCurrentUser(user as User);
+        })
+        .catch((err) => console.log(err));
+    });
   }
 
   function logout() {
     signOut(auth)
       .then(() => {
-        console.log("logged out");
-        setCurrentUser(null);
+        setCurrentUser(undefined);
       })
       .catch((err) => console.log(err));
   }
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { displayName, photoURL, uid, email } = user;
+
+        if (!displayName || !photoURL || !email) {
+          throw new Error("Missing information from Google Account.");
+        }
+
+        setCurrentUser({
+          id: uid,
+          name: displayName,
+          email: email,
+          image: photoURL,
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const value = {
     currentUser,
-    login,
+    SignInWithGoogle,
     logout,
   };
 

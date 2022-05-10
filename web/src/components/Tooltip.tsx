@@ -5,5 +5,11 @@ type Props = {
 
 export function Tooltip({ label, currentTooltip }: Props) {
   //@ts-ignore
-  return <div className={`tooltip ${currentTooltip}`} aria-label={label}></div>;
+  return (
+    <div
+      role="tooltip"
+      className={`tooltip ${currentTooltip}`}
+      aria-label={label}
+    ></div>
+  );
 }
