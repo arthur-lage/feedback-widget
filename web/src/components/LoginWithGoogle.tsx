@@ -1,8 +1,14 @@
 import GoogleLogo from "../assets/google-logo.svg";
+import { useUser } from "../hooks/useUser";
 
 export function LoginWithGoogle() {
+  const { login } = useUser();
+
   return (
-    <div className="flex flex-col absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+    <div
+      onClick={login}
+      className="flex flex-col absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
+    >
       <span className="text-center font-medium text-xl tracking-wide text-zinc-800 dark:text-zinc-100">
         Login in order to see all the feedbacks
       </span>

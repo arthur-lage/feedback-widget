@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 
 import { X } from "phosphor-react";
+
 import { useError } from "./hooks/useError";
+import { useUser } from "./hooks/useUser";
 
 import { Widget } from "./components/Widget";
 import { ThemeToggler } from "./components/ThemeToggler";
 import { FeedbacksList } from "./components/FeedbacksList";
 import { LoginWithGoogle } from "./components/LoginWithGoogle";
+import { Profile } from "./components/Profile";
 
 export function App() {
   const { removeError, errors } = useError();
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const { currentUser } = useUser();
 
   const [isDarkMode, setIsDarkMode] = useState<boolean>(
     () => localStorage.theme === "dark"
@@ -64,6 +67,8 @@ export function App() {
       )}
 
       <ThemeToggler isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+
+      {currentUser && <Profile />}
 
       {currentUser ? <FeedbacksList /> : <LoginWithGoogle />}
 

@@ -28,6 +28,10 @@ body {
   @apply right-[-10px] top-[56px];
 }
 
+.tooltip.profile::after {
+  @apply right-[-10px] top-[56px];
+}
+
 .has-tooltip:hover .tooltip::after {
   @apply opacity-100 pointer-events-auto visible;
 }
