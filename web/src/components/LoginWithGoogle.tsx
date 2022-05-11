@@ -13,7 +13,7 @@ export function LoginWithGoogle() {
         <button
           tabIndex={3}
           onClick={SignInWithGoogle}
-          className="flex items-center rounded-sm bg-brand-500 hover:bg-brand-300 transition-colors ease-linear duration-200 pt-[2px] pl-[2px] pb-[2px] pr-4 focus:ring-2 focus:ring-offset-2 focus:rinng-offset-white dark:focus:ring-offset-[#09090A] focus:ring-brand-500 focus:outline-none"
+          className="w-52 h-12 flex items-center rounded-sm bg-brand-500 hover:bg-brand-300 transition-colors ease-linear duration-200 pt-[2px] pl-[4px] pb-[2px] pr-[2px] focus:ring-2 focus:ring-offset-2 focus:rinng-offset-white dark:focus:ring-offset-[#09090A] focus:ring-brand-500 focus:outline-none"
         >
           <div className="bg-white mr-4 rounded-sm">
             <img
@@ -22,7 +22,7 @@ export function LoginWithGoogle() {
               alt="Google Logo"
             />
           </div>
-          <span className="font-[Ubuntu] font-medium text-white tracking-wide">
+          <span className="font-[Ubuntu] font-medium text-white tracking-wide sm:text-sm whitespace-nowrap min-w-[max-content]">
             Login with Google
           </span>
         </button>
